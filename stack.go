@@ -1,6 +1,8 @@
 package stack
 
-import "sync"
+import (
+	"sync"
+)
 
 // thread safe stack
 
@@ -8,7 +10,7 @@ type Stack struct {
 	top    *node
 	length int
 	mu     sync.Mutex
-	cond   *sync.Cond
+	Cond   *sync.Cond
 }
 
 type node struct {
@@ -62,5 +64,5 @@ func (this *Stack) Push(value interface{}) {
 	n := &node{value, this.top}
 	this.top = n
 	this.length++
-	this.cond.Signal()
+	this.Cond.Signal()
 }
